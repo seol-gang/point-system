@@ -1,21 +1,39 @@
 package io.hhplus.tdd.point.integration
 
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
 class PointServiceTest {
-    @Test
-    fun `should charge point`() {
+    @Nested
+    inner class Charge {
+        @Test
+        fun `should charge point`() {
+        }
+
+        @Test
+        fun `should write log to point history`() {
+        }
     }
 
-    @Test
-    fun `should use point`() {
+    @Nested
+    inner class Use {
+        @Test
+        fun `should use point`() {
+        }
+
+        @Test
+        fun `should write log to point history`() {
+        }
     }
 
-    @Test
-    fun `should get user point`() {
-    }
+    @Nested
+    inner class Get {
+        @Test
+        fun `should get user point`() {
+        }
 
-    @Test
-    fun `should get user point history`() {
+        @Test
+        fun `should get user point history`() {
+        }
     }
 }
