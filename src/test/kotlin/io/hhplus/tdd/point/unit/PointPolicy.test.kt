@@ -1,6 +1,6 @@
 package io.hhplus.tdd.point.unit
 
-import io.hhplus.tdd.point.UserPoint
+import io.hhplus.tdd.point.dto.entities.UserPoint
 import io.hhplus.tdd.point.policy.PointPolicy
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -14,11 +14,18 @@ class PointPolicyTest {
             @Test
             fun `charge amount less than MIN_AVAILABLE_POINT`() {
                 val policy = PointPolicy()
-                val userPoint = UserPoint(0, 0, 0);
+                val userPoint = UserPoint(
+                    0,
+                    0,
+                    0
+                );
                 val amount: Long = 999;
 
                 assertThrows<IllegalArgumentException> {
-                    policy.validateCharge(userPoint, amount)
+                    policy.validateCharge(
+                        userPoint,
+                        amount
+                    )
                 }
             }
 
@@ -29,7 +36,10 @@ class PointPolicyTest {
                 val amount: Long = PointPolicy.MAX_AVAILABLE_POINT + 1
 
                 assertThrows<IllegalArgumentException> {
-                    policy.validateCharge(userPoint, amount)
+                    policy.validateCharge(
+                        userPoint,
+                        amount
+                    )
                 }
             }
         }
@@ -37,26 +47,41 @@ class PointPolicyTest {
 
     @Nested
     inner class Use {
-        @Nested inner class ThrowIllegalArgumentException {
+        @Nested
+        inner class ThrowIllegalArgumentException {
             @Test
             fun `use amount less than MIN_AVAILABLE_POINT`() {
                 val policy = PointPolicy()
-                val userPoint = UserPoint(0, 1000, 0)
+                val userPoint = UserPoint(
+                    0,
+                    1000,
+                    0
+                )
                 val amount: Long = 999
 
                 assertThrows<IllegalArgumentException> {
-                    policy.validateUse(userPoint, amount)
+                    policy.validateUse(
+                        userPoint,
+                        amount
+                    )
                 }
             }
 
             @Test
             fun `use amount more than current point`() {
                 val policy = PointPolicy()
-                val userPoint = UserPoint(0, 1000, 0)
+                val userPoint = UserPoint(
+                    0,
+                    1000,
+                    0
+                )
                 val amount: Long = 1001
 
                 assertThrows<IllegalArgumentException> {
-                    policy.validateUse(userPoint, amount)
+                    policy.validateUse(
+                        userPoint,
+                        amount
+                    )
                 }
             }
         }

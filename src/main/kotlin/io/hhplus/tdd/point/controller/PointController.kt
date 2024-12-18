@@ -1,6 +1,6 @@
 package io.hhplus.tdd.point.controller
 
-import io.hhplus.tdd.point.PointHistory
+import io.hhplus.tdd.point.dto.entities.PointHistory
 import io.hhplus.tdd.point.dto.response.UserPointResponse
 import io.hhplus.tdd.point.service.PointService
 import org.slf4j.Logger

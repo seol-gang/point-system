@@ -1,6 +1,6 @@
 package io.hhplus.tdd.point.e2e
 
-import io.hhplus.tdd.point.TransactionType
+import io.hhplus.tdd.point.dto.entities.TransactionType
 import io.hhplus.tdd.point.repository.PointHistoryRepository
 import io.hhplus.tdd.point.repository.UserPointRepository
 import org.junit.jupiter.api.BeforeEach
