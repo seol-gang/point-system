@@ -16,7 +16,7 @@ class PointHistoryRepository(private val pointHistoryConn: PointHistoryTable) {
             userId,
             amount,
             transactionType,
-            0
+            System.currentTimeMillis()
         );
     }
 
