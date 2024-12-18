@@ -24,45 +24,38 @@ class PointService(
         return userPointRepo.findById(userId)
     }
 
+    @Synchronized
     fun chargePoint(
-        userId: Long,
-        amount: Long
+        userId: Long, amount: Long
     ): UserPoint {
         val userPoint = userPointRepo.findById(
             userId
         )
         pointPolicy.validateCharge(
-            userPoint,
-            amount
+            userPoint, amount
         )
         val result = userPointRepo.upsert(
-            userId,
-            userPoint.point + amount
+            userId, userPoint.point + amount
         )
         pointHistoryRepo.create(
-            userId,
-            amount,
-            TransactionType.CHARGE
+            userId, amount, TransactionType.CHARGE
         )
         return result;
     }
 
+    @Synchronized
     fun usePoint(
-        userId: Long,
-        amount: Long
+        userId: Long, amount: Long
     ): UserPoint {
         val userPoint = userPointRepo.findById(
             userId
         )
         pointPolicy.validateUse(userPoint, amount)
         val result = userPointRepo.upsert(
-            userId,
-            userPoint.point - amount
+            userId, userPoint.point - amount
         )
         pointHistoryRepo.create(
-            userId,
-            amount,
-            TransactionType.USE
+            userId, amount, TransactionType.USE
         )
         return result;
     }
