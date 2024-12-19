@@ -67,4 +67,42 @@ class PointServiceConcurrencyTest {
             result.point, 0
         )
     }
+
+    @Test
+    fun `should prevent exceeding maximum point limit during concurrent charge requests`() {
+        // given
+        val userId: Long = 1
+        val chargeAmount: Long = 600000
+
+        val count = 2
+        val latch = CountDownLatch(count)
+        val capturedError =
+            AtomicReference<Exception>()
+
+        // when
+        repeat(count) {
+            thread {
+                try {
+                    pointService.chargePoint(
+                        userId, chargeAmount
+                    )
+                } catch (e: Exception) {
+                    capturedError.set(e)
+                } finally {
+                    latch.countDown()
+                }
+            }
+        }
+        latch.await()
+
+        // then
+        val result =
+            pointService.getUserPoint(userId)
+
+        assertThat(capturedError.get()).isInstanceOf(
+            IllegalArgumentException::class.java
+        )
+        assertEquals(result.point, chargeAmount)
+    }
+
 }
