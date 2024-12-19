@@ -15,16 +15,13 @@ class PointPolicyTest {
             fun `charge amount less than MIN_AVAILABLE_POINT`() {
                 val policy = PointPolicy()
                 val userPoint = UserPoint(
-                    0,
-                    0,
-                    0
+                    0, 0, 0
                 );
                 val amount: Long = 999;
 
                 assertThrows<IllegalArgumentException> {
                     policy.validateCharge(
-                        userPoint,
-                        amount
+                        userPoint, amount
                     )
                 }
             }
@@ -32,13 +29,13 @@ class PointPolicyTest {
             @Test
             fun `charge amount more than MAX_AVAILABLE_POINT`() {
                 val policy = PointPolicy()
-                val userPoint = UserPoint(0, 0, 0)
-                val amount: Long = PointPolicy.MAX_AVAILABLE_POINT + 1
+                val userPoint =
+                    UserPoint(0, 500000, 0)
+                val amount: Long = 700000
 
                 assertThrows<IllegalArgumentException> {
                     policy.validateCharge(
-                        userPoint,
-                        amount
+                        userPoint, amount
                     )
                 }
             }
@@ -53,16 +50,13 @@ class PointPolicyTest {
             fun `use amount less than MIN_AVAILABLE_POINT`() {
                 val policy = PointPolicy()
                 val userPoint = UserPoint(
-                    0,
-                    1000,
-                    0
+                    0, 1000, 0
                 )
                 val amount: Long = 999
 
                 assertThrows<IllegalArgumentException> {
                     policy.validateUse(
-                        userPoint,
-                        amount
+                        userPoint, amount
                     )
                 }
             }
@@ -71,16 +65,13 @@ class PointPolicyTest {
             fun `use amount more than current point`() {
                 val policy = PointPolicy()
                 val userPoint = UserPoint(
-                    0,
-                    1000,
-                    0
+                    0, 1000, 0
                 )
                 val amount: Long = 1001
 
                 assertThrows<IllegalArgumentException> {
                     policy.validateUse(
-                        userPoint,
-                        amount
+                        userPoint, amount
                     )
                 }
             }

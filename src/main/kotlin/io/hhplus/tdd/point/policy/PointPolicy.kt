@@ -11,21 +11,19 @@ class PointPolicy {
     }
 
     fun validateCharge(
-        userPoint: UserPoint,
-        amount: Long
+        userPoint: UserPoint, amount: Long
     ) {
         if (amount < MIN_AVAILABLE_POINT) {
             throw IllegalArgumentException("Charge amount must be greater than $MIN_AVAILABLE_POINT points")
         }
 
-        if (amount > MAX_AVAILABLE_POINT) {
+        if (userPoint.point + amount > MAX_AVAILABLE_POINT) {
             throw IllegalArgumentException("Cannot exceed maximum available point limit")
         }
     }
 
     fun validateUse(
-        userPoint: UserPoint,
-        amount: Long
+        userPoint: UserPoint, amount: Long
     ) {
         if (amount < MIN_AVAILABLE_POINT) {
             throw IllegalArgumentException("Use amount must be greater than $MIN_AVAILABLE_POINT points")
