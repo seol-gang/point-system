@@ -45,10 +45,10 @@ class PointServiceTest {
             val amount: Long = 1000;
 
             // when
-            val userPoint = pointService.chargePoint(
-                TEST_USER_ID,
-                amount
-            );
+            val userPoint =
+                pointService.chargePoint(
+                    TEST_USER_ID, amount
+                );
 
             // then
             assertThat(userPoint.point).isEqualTo(
@@ -63,14 +63,14 @@ class PointServiceTest {
 
             // when
             pointService.chargePoint(
-                TEST_USER_ID,
-                amount
+                TEST_USER_ID, amount
             );
 
             // then
-            val pointHistory = pointHistoryRepo.findAllByUserId(
-                TEST_USER_ID
-            );
+            val pointHistory =
+                pointHistoryRepo.findAllByUserId(
+                    TEST_USER_ID
+                );
 
             assertThat(pointHistory.size).isEqualTo(
                 1
@@ -93,16 +93,15 @@ class PointServiceTest {
         fun `should use point`() {
             //given
             userPointRepo.upsert(
-                TEST_USER_ID,
-                TEST_INITIAL_POINT
+                TEST_USER_ID, TEST_INITIAL_POINT
             );
             val amount: Long = 1000;
 
             // when
-            val updatedUserPoint = pointService.usePoint(
-                TEST_USER_ID,
-                amount
-            );
+            val updatedUserPoint =
+                pointService.usePoint(
+                    TEST_USER_ID, amount
+                );
 
             // then
             assertThat(updatedUserPoint.point).isEqualTo(
@@ -114,21 +113,20 @@ class PointServiceTest {
         fun `should write log to point history`() {
             // given
             userPointRepo.upsert(
-                TEST_USER_ID,
-                TEST_INITIAL_POINT
+                TEST_USER_ID, TEST_INITIAL_POINT
             );
 
             // when
             val amount: Long = 1000;
             pointService.usePoint(
-                TEST_USER_ID,
-                amount
+                TEST_USER_ID, amount
             );
 
             // then
-            val pointHistory = pointHistoryRepo.findAllByUserId(
-                TEST_USER_ID
-            );
+            val pointHistory =
+                pointHistoryRepo.findAllByUserId(
+                    TEST_USER_ID
+                );
             assertThat(pointHistory.size).isEqualTo(
                 1
             );
@@ -155,9 +153,10 @@ class PointServiceTest {
             );
 
             // when
-            val userPoint = pointService.getUserPoint(
-                TEST_USER_ID
-            );
+            val userPoint =
+                pointService.getUserPoint(
+                    TEST_USER_ID
+                );
 
             // then
             assertThat(userPoint.id).isEqualTo(
@@ -183,9 +182,10 @@ class PointServiceTest {
             );
 
             // when
-            val pointHistory = pointService.getUserPointHistory(
-                TEST_USER_ID
-            );
+            val pointHistory =
+                pointService.getUserPointHistories(
+                    TEST_USER_ID
+                );
 
             // then
             assertThat(pointHistory.size).isEqualTo(

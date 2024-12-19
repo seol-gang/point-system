@@ -14,7 +14,7 @@ class PointService(
     private val userPointRepo: UserPointRepository,
     private val pointPolicy: PointPolicy
 ) {
-    fun getUserPointHistory(userId: Long): List<PointHistory> {
+    fun getUserPointHistories(userId: Long): List<PointHistory> {
         return pointHistoryRepo.findAllByUserId(
             userId
         )

@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.*
 class PointController(
     private val pointService: PointService,
 ) {
-    private val logger: Logger = LoggerFactory.getLogger(
-        javaClass
-    )
+    private val logger: Logger =
+        LoggerFactory.getLogger(
+            javaClass
+        )
 
     /**
      * TODO - 특정 유저의 포인트를 조회하는 기능을 작성해주세요.
@@ -37,9 +38,10 @@ class PointController(
      */
     @GetMapping("{id}/histories")
     fun history(@PathVariable id: Long): ResponseEntity<List<PointHistory>> {
-        val pointHistories = pointService.getUserPointHistory(
-            id
-        )
+        val pointHistories =
+            pointService.getUserPointHistories(
+                id
+            )
         return ResponseEntity.ok(pointHistories)
     }
 
@@ -51,9 +53,10 @@ class PointController(
         @PathVariable id: Long,
         @RequestBody amount: Long
     ): ResponseEntity<UserPointResponse> {
-        val chargedUserPoint = pointService.chargePoint(
-            id, amount
-        )
+        val chargedUserPoint =
+            pointService.chargePoint(
+                id, amount
+            )
         return ResponseEntity.ok(
             UserPointResponse.toResponse(
                 chargedUserPoint
