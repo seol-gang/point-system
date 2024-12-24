@@ -1,7 +1,7 @@
 package io.hhplus.tdd.database
 
-import io.hhplus.tdd.point.PointHistory
-import io.hhplus.tdd.point.TransactionType
+import io.hhplus.tdd.point.dto.entities.PointHistory
+import io.hhplus.tdd.point.dto.entities.TransactionType
 import org.springframework.stereotype.Component
 
 /**
@@ -11,14 +11,16 @@ import org.springframework.stereotype.Component
 class PointHistoryTable {
     private val table = mutableListOf<PointHistory>()
     private var cursor: Long = 1L
-
     fun insert(
         id: Long,
         amount: Long,
         transactionType: TransactionType,
         updateMillis: Long,
     ): PointHistory {
-        Thread.sleep(Math.random().toLong() * 300L)
+        Thread.sleep(
+            Math.random()
+                .toLong() * 300L
+        )
         val history = PointHistory(
             id = cursor++,
             userId = id,
